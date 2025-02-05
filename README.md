@@ -16,7 +16,7 @@ hs_<type>_delete(HS_<type> set, <type> elem)
 hs_<type>_contains(HS_<type> set, <type> elem)
 hs_<type>_free(HS_<type> set)
 ```
-Here's an example of its usage, which you can build using `make`, since it's in `example.c`:
+Here's an example of its usage, which you can build using `make`, since it's in `example1.c`:
 ```
 #include <stddef.h>
 #include <stdio.h>
