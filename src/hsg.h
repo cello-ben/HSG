@@ -11,7 +11,7 @@ THE SOFTWARE IS PROVIDED “AS IS”, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR I
 #ifndef HSG_H
 #define HSG_H
 
-#define HSG_DEBUG //This will be used more extensively when I add some debug print functionality (TODO).
+// #define HSG_DEBUG //This will be used when I add some debug print functionality (TODO).
 
 #include <stdbool.h>
 #include <stdlib.h>

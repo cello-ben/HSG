@@ -1,4 +1,5 @@
-#include <stddef.h>
+#include <stdio.h>
+//stdlib.h already included in hsg.h
 #include "hsg.h"
 #include "example1.h"
 

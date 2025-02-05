@@ -1,4 +1,6 @@
-#include <stddef.h>
+#include <stdio.h>
+//stdlib.h already included in hsg.h
+#include "hsg.h"
 #include "example3.h"
 
 //In order to use a pointer, we need to do a typedef, which you can see in the header file.
