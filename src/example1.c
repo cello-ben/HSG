@@ -1,6 +1,5 @@
 #include <stdio.h>
 //stdlib.h already included in hsg.h
-#include "hsg.h"
 #include "example1.h"
 
 HSResult HS_int_eq(int a, int b)

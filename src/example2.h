@@ -1,6 +1,7 @@
 #ifndef HS_EXAMPLE_2
 #define HS_EXAMPLE_2
 
+#include <stddef.h>
 #include "hsg.h"
 
 typedef struct Coordinate {
