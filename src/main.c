@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include "example1.h"
 #include "example2.h"
+#include "example3.h"
 
 #define NUM_EXAMPLES 3
 
@@ -25,8 +26,13 @@ int main(int argc, char **argv)
     {
         case 1:
             example_1();
+            break;
         case 2:
             example_2();
+            break;
+        case 3:
+            example_3();
+            break;
         default:
             break;
     }

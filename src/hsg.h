@@ -159,7 +159,7 @@ typedef enum HSResult {
         prev = NULL; \
         while (tmp) \
         { \
-            if (tmp->elem == elem) \
+            if (HS_##type##_eq(tmp->elem, elem)) \
             { \
                 if (prev != NULL) \
                 { \
