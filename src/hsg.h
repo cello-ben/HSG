@@ -38,7 +38,7 @@ typedef enum HSResult {
     #endif
 } HSResult;
 
-//Similar TODO items as HSI.
+//Similar TODO items as HSI (https://github.com/cello-ben/HSI/blob/main/src/hsi.h).
 
 #define HS_INIT(type)                                                                       \
     typedef struct ChainNode_##type {                                                       \
