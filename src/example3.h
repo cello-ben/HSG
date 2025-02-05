@@ -1,5 +1,5 @@
-#ifndef HS_EXAMPLE_3
-#define HS_EXAMPLE_3
+#ifndef EXAMPLE_3_H
+#define EXAMPLE_3_H
 
 #include <stddef.h>
 #include "hsg.h"
@@ -16,4 +16,4 @@ HSResult HS_Person_ptr_eq(Person *a, Person *b);
 size_t HS_Person_ptr_hash(Person *p);
 void example_3(void);
 
-#endif //HS_EXAMPLE_3
+#endif //EXAMPLE_3_H
