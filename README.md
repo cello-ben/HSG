@@ -48,4 +48,4 @@ int main(void)
 }
 ```
 
-See the examples in `src` for more. Thanks so much to u/strcspn on Reddit for their help with adding struct support. I plan to build on that and their pointer suggestions soon.
+See the examples in `src` for more. Thanks so much to u/strcspn on Reddit for their help with adding struct support. I have used their advice to make this considerably more versatile.
