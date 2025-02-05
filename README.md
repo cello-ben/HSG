@@ -1,5 +1,5 @@
 # HSG
-With some very helpful guidance from some commenters on r/cprogramming, I created [HSI](https://github.com/cello-ben/HSI). One commenter recommended that I make a generic hash set, so I present HSG, a macro-based hash set that uses the same principles as HSI, but allows for user-defined types. There's a great deal of work to do on it to make it *truly* generic. However, I'm proud of how the first iteration has come out. **Don't use this in production, it's an educational project for me.**
+With some very helpful guidance from some commenters on r/cprogramming, I created [HSI](https://github.com/cello-ben/HSI). One commenter recommended that I make a generic hash set, so I present HSG, a macro-based hash set that uses the same principles as HSI, but allows for user-defined types. There's a great deal of work to do on it to make it *truly* generic. However, I'm proud of how it has come out so far. **Don't use this in production, it's an educational project for me.**
 
 # Usage
 First, create a hash function for your desired type, which, at least for now, *must* follow this pattern:
