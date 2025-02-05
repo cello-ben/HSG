@@ -135,7 +135,7 @@ typedef enum HSResult {
         struct ChainNode_##type *node = set->nodes[idx]; \
         while (node != NULL) \
         { \
-            if (node->elem == elem) \
+            if (HS_##type##_eq(node->elem, elem)) \
             { \
                 return HS_TRUE; \
             } \
@@ -180,4 +180,4 @@ typedef enum HSResult {
         return HS_NONMEMBER_ERR; \
     }
 
-#endif
+#endif //HSG_H
