@@ -40,144 +40,144 @@ typedef enum HSResult {
 
 //Similar TODO items as HSI.
 
-#define HS_INIT(type) \
-    typedef struct ChainNode_##type { \
-        type elem; \
-        struct ChainNode_##type *next; \
-        } ChainNode_##type; \
-    \
-    typedef struct HS_##type { \
-        size_t capacity; \
-        struct ChainNode_##type **nodes; \
-    } HS_##type; \
-    \
-    static struct HS_##type *hs_##type##_init(void) \
-    { \
-        struct HS_##type *set = malloc(sizeof(struct HS_##type)); \
-        if (set == NULL) \
-        { \
-            return NULL; \
-        } \
-        set->capacity = HS_INITIAL_LENGTH; \
-        set->nodes = malloc(sizeof(struct ChainNode_##type) * HS_INITIAL_LENGTH); \
-        if (set->nodes == NULL) \
-        { \
-            free(set); \
-            return NULL; \
-        } \
-        for (size_t i = 0; i < set->capacity; i++) \
-        { \
-            set->nodes[i] = NULL; \
-        } \
-        return set; \
-    } \
-    \
-    static HSResult hs_##type##_free(struct HS_##type *set) \
-    { \
-        if (set == NULL) \
-        { \
-            return HS_NULL_REFERENCE_ERR; \
-        } \
-        if (set->nodes == NULL) \
-        { \
-            free(set); \
-            return HS_SUCCESS; \
-        } \
-        for (size_t i = 0; i < set->capacity; i++) \
-        { \
-            struct ChainNode_##type *tmp; \
-            while (set->nodes[i] != NULL) \
-            { \
-                tmp = set->nodes[i]->next; \
-                free(set->nodes[i]); \
-                set->nodes[i] = tmp; \
-            } \
-            free(set->nodes[i]); \
-        } \
-        free(set->nodes); \
-        free(set); \
-        return HS_SUCCESS; \
-    } \
-    \
-    static HSResult hs_##type##_add(struct HS_##type *set, type elem) \
-    { \
-        if (set == NULL || set->nodes == NULL) \
-        { \
-            return HS_NULL_REFERENCE_ERR; \
-        } \
-        size_t idx = HS_##type##_hash(elem); \
-        if (set->capacity <= 0 || idx >= set->capacity) \
-        { \
-            return HS_CAPACITY_ERR; \
-        } \
-        struct ChainNode_##type *node = malloc(sizeof(struct ChainNode_##type)); \
-        if (node == NULL) \
-        { \
-            return HS_MEMORY_ERR; \
-        } \
-        node->elem = elem; \
-        node->next = set->nodes[idx]; \
-        set->nodes[idx] = node; \
-        return HS_SUCCESS; \
-    } \
-    \
-    static HSResult hs_##type##_contains(struct HS_##type *set, type elem) \
-    { \
-        if (set == NULL || set->nodes == NULL) \
-        { \
-            return HS_NULL_REFERENCE_ERR; \
-        } \
-        size_t idx = HS_##type##_hash(elem); \
-        if (set->nodes[idx] == NULL) \
-        { \
-            return HS_FALSE; \
-        } \
-        struct ChainNode_##type *node = set->nodes[idx]; \
-        while (node != NULL) \
-        { \
-            if (HS_##type##_eq(node->elem, elem)) \
-            { \
-                return HS_TRUE; \
-            } \
-            if (node->next != NULL) \
-            { \
-                node = node->next; \
-            } \
-            else \
-            { \
-                break; \
-            } \
-        } \
-        return HS_FALSE; \
-    } \
-    \
-    static HSResult hs_##type##_delete(struct HS_##type *set, type elem) \
-    { \
-        size_t idx = HS_##type##_hash(elem); \
-        struct ChainNode_##type *tmp, *prev; \
-        tmp = set->nodes[idx]; \
-        prev = NULL; \
-        while (tmp) \
-        { \
-            if (HS_##type##_eq(tmp->elem, elem)) \
-            { \
-                if (prev != NULL) \
-                { \
-                    prev->next = tmp->next; \
-                    free(tmp); \
-                    return HS_SUCCESS; \
-                } \
-                else \
-                { \
-                    set->nodes[idx] = set->nodes[idx]->next; \
-                    free(tmp); \
-                    return HS_SUCCESS; \
-                } \
-            } \
-            prev = tmp; \
-            tmp = tmp->next; \
-        } \
-        return HS_NONMEMBER_ERR; \
+#define HS_INIT(type)                                                                       \
+    typedef struct ChainNode_##type {                                                       \
+        type elem;                                                                          \
+        struct ChainNode_##type *next;                                                      \
+        } ChainNode_##type;                                                                 \
+                                                                                            \
+    typedef struct HS_##type {                                                              \
+        size_t capacity;                                                                    \
+        struct ChainNode_##type **nodes;                                                    \
+    } HS_##type;                                                                            \
+                                                                                            \
+    static struct HS_##type *hs_##type##_init(void)                                         \
+    {                                                                                       \
+        struct HS_##type *set = malloc(sizeof(struct HS_##type));                           \
+        if (set == NULL)                                                                    \
+        {                                                                                   \
+            return NULL;                                                                    \
+        }                                                                                   \
+        set->capacity = HS_INITIAL_LENGTH;                                                  \
+        set->nodes = malloc(sizeof(struct ChainNode_##type) * HS_INITIAL_LENGTH);           \
+        if (set->nodes == NULL)                                                             \
+        {                                                                                   \
+            free(set);                                                                      \
+            return NULL;                                                                    \
+        }                                                                                   \
+        for (size_t i = 0; i < set->capacity; i++)                                          \
+        {                                                                                   \
+            set->nodes[i] = NULL;                                                           \
+        }                                                                                   \
+        return set;                                                                         \
+    }                                                                                       \
+                                                                                            \
+    static HSResult hs_##type##_free(struct HS_##type *set)                                 \
+    {                                                                                       \
+        if (set == NULL)                                                                    \
+        {                                                                                   \
+            return HS_NULL_REFERENCE_ERR;                                                   \
+        }                                                                                   \
+        if (set->nodes == NULL)                                                             \
+        {                                                                                   \
+            free(set);                                                                      \
+            return HS_SUCCESS;                                                              \
+        }                                                                                   \
+        for (size_t i = 0; i < set->capacity; i++)                                          \
+        {                                                                                   \
+            struct ChainNode_##type *tmp;                                                   \
+            while (set->nodes[i] != NULL)                                                   \
+            {                                                                               \
+                tmp = set->nodes[i]->next;                                                  \
+                free(set->nodes[i]);                                                        \
+                set->nodes[i] = tmp;                                                        \
+            }                                                                               \
+            free(set->nodes[i]);                                                            \
+        }                                                                                   \
+        free(set->nodes);                                                                   \
+        free(set);                                                                          \
+        return HS_SUCCESS;                                                                  \
+    }                                                                                       \
+                                                                                            \
+    static HSResult hs_##type##_add(struct HS_##type *set, type elem)                       \
+    {                                                                                       \
+        if (set == NULL || set->nodes == NULL)                                              \
+        {                                                                                   \
+            return HS_NULL_REFERENCE_ERR;                                                   \
+        }                                                                                   \
+        size_t idx = HS_##type##_hash(elem);                                                \
+        if (set->capacity <= 0 || idx >= set->capacity)                                     \
+        {                                                                                   \
+            return HS_CAPACITY_ERR;                                                         \
+        }                                                                                   \
+        struct ChainNode_##type *node = malloc(sizeof(struct ChainNode_##type));            \
+        if (node == NULL)                                                                   \
+        {                                                                                   \
+            return HS_MEMORY_ERR;                                                           \
+        }                                                                                   \
+        node->elem = elem;                                                                  \
+        node->next = set->nodes[idx];                                                       \
+        set->nodes[idx] = node;                                                             \
+        return HS_SUCCESS;                                                                  \
+    }                                                                                       \
+                                                                                            \
+    static HSResult hs_##type##_contains(struct HS_##type *set, type elem)                  \
+    {                                                                                       \
+        if (set == NULL || set->nodes == NULL)                                              \
+        {                                                                                   \
+            return HS_NULL_REFERENCE_ERR;                                                   \
+        }                                                                                   \
+        size_t idx = HS_##type##_hash(elem);                                                \
+        if (set->nodes[idx] == NULL)                                                        \
+        {                                                                                   \
+            return HS_FALSE;                                                                \
+        }                                                                                   \
+        struct ChainNode_##type *node = set->nodes[idx];                                    \
+        while (node != NULL)                                                                \
+        {                                                                                   \
+            if (HS_##type##_eq(node->elem, elem))                                           \
+            {                                                                               \
+                return HS_TRUE;                                                             \
+            }                                                                               \
+            if (node->next != NULL)                                                         \
+            {                                                                               \
+                node = node->next;                                                          \
+            }                                                                               \
+            else                                                                            \
+            {                                                                               \
+                break;                                                                      \
+            }                                                                               \
+        }                                                                                   \
+        return HS_FALSE;                                                                    \
+    }                                                                                       \
+                                                                                            \
+    static HSResult hs_##type##_delete(struct HS_##type *set, type elem)                    \
+    {                                                                                       \
+        size_t idx = HS_##type##_hash(elem);                                                \
+        struct ChainNode_##type *tmp, *prev;                                                \
+        tmp = set->nodes[idx];                                                              \
+        prev = NULL;                                                                        \
+        while (tmp)                                                                         \
+        {                                                                                   \
+            if (HS_##type##_eq(tmp->elem, elem))                                            \
+            {                                                                               \
+                if (prev != NULL)                                                           \
+                {                                                                           \
+                    prev->next = tmp->next;                                                 \
+                    free(tmp);                                                              \
+                    return HS_SUCCESS;                                                      \
+                }                                                                           \
+                else                                                                        \
+                {                                                                           \
+                    set->nodes[idx] = set->nodes[idx]->next;                                \
+                    free(tmp);                                                              \
+                    return HS_SUCCESS;                                                      \
+                }                                                                           \
+            }                                                                               \
+            prev = tmp;                                                                     \
+            tmp = tmp->next;                                                                \
+        }                                                                                   \
+        return HS_NONMEMBER_ERR;                                                            \
     }
 
 #endif //HSG_H
