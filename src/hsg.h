@@ -11,7 +11,7 @@
 #ifndef HSG_H
 #define HSG_H
 
-// #define HSG_DEBUG    //For debug printing.
+#define HSG_DEBUG    //For debug printing.
 
 #include <stdbool.h>
 #include <stdlib.h>
@@ -23,8 +23,7 @@
 
 #define HS_INITIAL_LENGTH    4096
 
-typedef enum HSResult
-{
+typedef enum HSResult {
    HS_SUCCESS = 0,
    HS_FALSE   = 0,
    HS_TRUE,

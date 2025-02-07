@@ -15,7 +15,7 @@ size_t HS_Person_ptr_hash(Person *p)
 {
     int n = p->age;
     n &= 0xF31;
-    n *= (9 >> 3);
+    n *= (9 << 3);
     n ^= 12;
     n <<= 8;
     return abs(n % HS_INITIAL_LENGTH) - 1;

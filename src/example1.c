@@ -12,7 +12,7 @@ HSResult HS_int_eq(int a, int b)
 size_t HS_int_hash(int num)
 {
     num &= 0xF31;
-    num *= (9 >> 3);
+    num *= (9 << 3);
     num ^= 12;
     num <<= 8;
     return abs(num % HS_INITIAL_LENGTH) - 1;
