@@ -73,29 +73,6 @@ static HSResult _hs_debug_printf(const char *fmt, ...)
            size_t capacity;                                                               \
            struct ChainNode_ ## type **nodes;                                             \
         } HS_ ## type;                                                                    \
-        static HSResult _hs_debug_print_all_occupied_buckets(HS_ ## type * set)           \
-        {                                                                                 \
-                                                                       \
-           int printf_res;                                                                \
-           if (set == NULL || set->nodes == NULL)                                         \
-           {                                                                              \
-              return(HS_NULL_REFERENCE_ERR);                                              \
-           }                                                                              \
-                                                                                          \
-           for (size_t i = 0; i < set->capacity; i++)                                     \
-           {                                                                              \
-              if (set->nodes[i] != NULL)                                                  \
-              {                                                                           \
-                 printf_res = printf("%zu\n", i);                                         \
-                 if (printf_res < 0)                                                      \
-                 {                                                                        \
-                    return(HS_DEBUG_PRINT_ERR);                                           \
-                 }                                                                        \
-              }                                                                           \
-           }                                                                              \
-                                                                                   \
-           return(HS_SUCCESS);                                                            \
-        }                                                                                 \
                                                                                           \
         static struct HS_ ## type *hs_ ## type ## _init(void)                             \
         {                                                                                 \
