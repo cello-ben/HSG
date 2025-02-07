@@ -162,6 +162,7 @@ void test(void)
     hs_int_free(hs_int); //TODO figure out if there is a way to optimize freeing.
 
     HS_StringQuartetPtr *hs_sq = hs_StringQuartetPtr_init();
+    hs_StringQuartetPtr_free(hs_sq);
     assert(hs_sq != NULL);
 
     // for (int i = 0; i < )
