@@ -11,7 +11,7 @@
 #ifndef HSG_H
 #define HSG_H
 
-#define HSG_DEBUG    //For debug printing.
+// #define HSG_DEBUG    //For debug printing.
 
 #include <stdbool.h>
 #include <stdlib.h>
@@ -44,19 +44,19 @@ typedef enum HSResult
 static HSResult _hs_debug_printf(const char *fmt, ...)
 {
     #ifdef HSG_DEBUG //TODO figure out if null checks are necessary.
-   if (fmt == NULL)
-   {
-      return(HS_NULL_REFERENCE_ERR);
-   }
-   va_list args;
-   va_start(args, fmt);
-   int vprintf_res = vprintf(fmt, args);
-   va_end(args);
-   if (vprintf_res < 0)      //vprintf returns a negative number if there is an error (positive error codes won't exist, since it returns the number of characters written, not including null terminator).
-   {
-      return(HS_DEBUG_PRINT_ERR);
-   }
-   return(HS_SUCCESS);
+        if (fmt == NULL)
+        {
+            return(HS_NULL_REFERENCE_ERR);
+        }
+        va_list args;
+        va_start(args, fmt);
+        int vprintf_res = vprintf(fmt, args);
+        va_end(args);
+        if (vprintf_res < 0)      //vprintf returns a negative number if there is an error (positive error codes won't exist, since it returns the number of characters written, not including null terminator).
+        {
+            return(HS_DEBUG_PRINT_ERR);
+        }
+        return(HS_SUCCESS);
     #endif
    return(HS_SUCCESS); //TODO figure out whether or not to return from the enum here, as opposed to just 0, since we're not actually doing any operations besides returning.
 }
