@@ -34,7 +34,7 @@ typedef enum HSResult {
    HS_INIT_ERR,
    HS_OVERFLOW_ERR,
     #ifdef HSG_DEBUG
-   HS_DEBUG_PRINT_ERR
+       HS_DEBUG_PRINT_ERR
     #endif
 } HSResult;
 
